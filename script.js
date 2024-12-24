@@ -74,7 +74,7 @@ window.addEventListener("touchend", function (e) {
         // Swipe left
         gsap.to("#marque", {
             transform: "translateX(-200%)",
-            duration: 1.5,
+            duration: 0.7,
             repeat: -1,
             ease: "none"
         });
@@ -82,7 +82,7 @@ window.addEventListener("touchend", function (e) {
         // Swipe right
         gsap.to("#marque", {
             transform: "translateX(0%)",
-            duration: 1.5,
+            duration: 0.7,
             repeat: -1,
             ease: "none"
         });

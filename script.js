@@ -38,11 +38,13 @@
 
 
 
-let startX, endX;
+let startX = 0;
+let endX = 0;
 
-// For desktop
+// For desktop (wheel event)
 window.addEventListener("wheel", function (dets) {
     if (dets.deltaY > 0) {
+        // Scroll down
         gsap.to("#marque", {
             transform: "translateX(-200%)",
             duration: 1.5,
@@ -50,6 +52,7 @@ window.addEventListener("wheel", function (dets) {
             ease: "none"
         });
     } else {
+        // Scroll up
         gsap.to("#marque", {
             transform: "translateX(0%)",
             duration: 1.5,
@@ -59,17 +62,15 @@ window.addEventListener("wheel", function (dets) {
     }
 });
 
-// For mobile
+// For mobile (touch event)
 window.addEventListener("touchstart", function (e) {
-    startX = e.touches[0].clientX;
+    startX = e.touches[0].clientX; // Capture the starting X coordinate
 });
 
-window.addEventListener("touchmove", function (e) {
-    endX = e.touches[0].clientX;
-});
+window.addEventListener("touchend", function (e) {
+    endX = e.changedTouches[0].clientX; // Capture the ending X coordinate
 
-window.addEventListener("touchend", function () {
-    if (startX > endX) {
+    if (startX > endX + 50) {
         // Swipe left
         gsap.to("#marque", {
             transform: "translateX(-200%)",
@@ -77,7 +78,7 @@ window.addEventListener("touchend", function () {
             repeat: -1,
             ease: "none"
         });
-    } else if (startX < endX) {
+    } else if (startX < endX - 50) {
         // Swipe right
         gsap.to("#marque", {
             transform: "translateX(0%)",
